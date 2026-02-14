@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-module.exports = {
+export default {
   async getRestaurants(ctx) {
     try {
       const response = await axios.get(
