@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_restaurant_aggregated_discount_info_v3s",
+  "info": {
+    "displayName": "discount"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "string"
+    },
+    "subHeader": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

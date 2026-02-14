@@ -478,6 +478,10 @@ export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    aggregatedDiscountInfoV3: Schema.Attribute.Component<
+      'restaurant.aggregated-discount-info-v3',
+      true
+    >;
     areaName: Schema.Attribute.String;
     avgRating: Schema.Attribute.Decimal;
     avgRatingString: Schema.Attribute.String;
@@ -487,10 +491,6 @@ export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     cuisines: Schema.Attribute.JSON;
-    deliveryTime: Schema.Attribute.Integer;
-    discountHeader: Schema.Attribute.String;
-    discountSubHeader: Schema.Attribute.String;
-    lastMileTravel: Schema.Attribute.Decimal;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     locality: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
@@ -501,7 +501,7 @@ export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resId: Schema.Attribute.String;
-    slaString: Schema.Attribute.String;
+    sla: Schema.Attribute.Component<'restaurant.sla', true>;
     totalRatingsString: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

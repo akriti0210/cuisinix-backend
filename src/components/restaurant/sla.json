@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_restaurant_slas",
+  "info": {
+    "displayName": "sla"
+  },
+  "options": {},
+  "attributes": {
+    "deliveryTime": {
+      "type": "integer"
+    },
+    "lastMileTravel": {
+      "type": "decimal"
+    },
+    "slaString": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

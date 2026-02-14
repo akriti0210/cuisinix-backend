@@ -38,26 +38,21 @@
     "veg": {
       "type": "boolean"
     },
-    "deliveryTime": {
-      "type": "integer"
-    },
-    "lastMileTravel": {
-      "type": "decimal"
-    },
-    "slaString": {
-      "type": "string"
-    },
-    "discountHeader": {
-      "type": "string"
-    },
-    "discountSubHeader": {
-      "type": "string"
-    },
     "name": {
       "type": "string"
     },
     "resId": {
       "type": "string"
+    },
+    "sla": {
+      "type": "component",
+      "component": "restaurant.sla",
+      "repeatable": true
+    },
+    "aggregatedDiscountInfoV3": {
+      "type": "component",
+      "component": "restaurant.aggregated-discount-info-v3",
+      "repeatable": true
     }
   }
 }
