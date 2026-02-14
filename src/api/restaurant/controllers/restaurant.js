@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   async getRestaurants(ctx) {
@@ -24,6 +24,19 @@ export default {
       console.error("Response:", err.response?.data);
 
       ctx.throw(500, "Error fetching restaurants");
+    }
+  },
+
+  async getRestaurantMenu(ctx) {
+    const { id } = ctx.params;
+
+    try {
+      const response = await axios.get(
+        `https://namastedev.com/api/v1/listRestaurantMenu/${id}`
+      );
+      ctx.body = response.data;
+    } catch (err) {
+      ctx.throw(500, 'Error fetching menu');
     }
   },
 };
