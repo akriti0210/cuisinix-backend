@@ -467,6 +467,49 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiRestaurantRestaurant extends Struct.CollectionTypeSchema {
+  collectionName: 'restaurants';
+  info: {
+    displayName: 'Restaurant';
+    pluralName: 'restaurants';
+    singularName: 'restaurant';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    areaName: Schema.Attribute.String;
+    avgRating: Schema.Attribute.Decimal;
+    avgRatingString: Schema.Attribute.String;
+    cloudinaryImageId: Schema.Attribute.String;
+    costForTwo: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    cuisines: Schema.Attribute.JSON;
+    deliveryTime: Schema.Attribute.Integer;
+    discountHeader: Schema.Attribute.String;
+    discountSubHeader: Schema.Attribute.String;
+    lastMileTravel: Schema.Attribute.Decimal;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    locality: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::restaurant.restaurant'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    resId: Schema.Attribute.String;
+    slaString: Schema.Attribute.String;
+    totalRatingsString: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    veg: Schema.Attribute.Boolean;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -979,6 +1022,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::restaurant.restaurant': ApiRestaurantRestaurant;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

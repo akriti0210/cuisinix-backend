@@ -5,7 +5,7 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['https://namastedev.com'], // React Parcel URL
+      origin: ['https://cuisinix.onrender.com/'], // React Parcel URL
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       headers: '*',
     },

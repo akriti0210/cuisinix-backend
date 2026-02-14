@@ -1,42 +1,58 @@
-import axios from 'axios';
+'use strict';
 
-export default {
-  async getRestaurants(ctx) {
-    try {
-      console.log("Calling external API...");
+module.exports = {
+  async customRestaurantList(ctx) {
+    const restaurants = await strapi.entityService.findMany(
+      'api::restaurant.restaurant',
+      { fields: ['*'] }
+    );
 
-      const response = await axios.get(
-        "https://namastedev.com/api/v1/listRestaurants",
-        {
-          headers: {
-            "User-Agent": "Mozilla/5.0",
-            Accept: "application/json",
-          },
-          timeout: 10000,
-        }
-      );
+    const formatted = restaurants.map((r) => ({
+      info: {
+        resId: String(r.resId),
+        name: r.name,
+        cloudinaryImageId: r.cloudinaryImageId,
+        locality: r.locality,
+        areaName: r.areaName,
+        costForTwo: r.costForTwo,
+        cuisines: r.cuisines,
+        avgRating: r.avgRating,
+        avgRatingString: r.avgRatingString,
+        totalRatingsString: r.totalRatingsString,
+        veg: r.veg,
+        sla: {
+          deliveryTime: r.deliveryTime,
+          lastMileTravel: r.lastMileTravel,
+          slaString: r.slaString,
+        },
+        aggregatedDiscountInfoV3: {
+          header: r.discountHeader,
+          subHeader: r.discountSubHeader,
+        },
+      },
+    }));
 
-      ctx.body = response.data;
-    } catch (err) {
-      console.error("AXIOS ERROR:");
-      console.error("Message:", err.message);
-      console.error("Code:", err.code);
-      console.error("Response:", err.response?.data);
-
-      ctx.throw(500, "Error fetching restaurants");
-    }
-  },
-
-  async getRestaurantMenu(ctx) {
-    const { id } = ctx.params;
-
-    try {
-      const response = await axios.get(
-        `https://namastedev.com/api/v1/listRestaurantMenu/${id}`
-      );
-      ctx.body = response.data;
-    } catch (err) {
-      ctx.throw(500, 'Error fetching menu');
-    }
+    ctx.body = {
+      status: true,
+      message: "Restaurant List fetched successfully",
+      data: {
+        data: {
+          cards: [
+            {},
+            {
+              card: {
+                card: {
+                  gridElements: {
+                    infoWithStyle: {
+                      restaurants: formatted,
+                    },
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
+    };
   },
 };
